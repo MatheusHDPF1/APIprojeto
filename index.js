@@ -9,6 +9,9 @@ const app = express();
 app.use(express.json());
 
 
+app.use(cors())
+
+
 const conexao = mysql.createConnection({
     host:"localhost",
     user:"root",
@@ -24,8 +27,7 @@ conexao.connect((erro)=>{
     console.log("Conectado ao banco - > "+conexao.threadId);
 })
 
-app.get("/produtos/listar", (req, res) => {
-    //consultar sql para selecionar os produtos no banco de dados
+app.get("/produto/listar", (req, res) => {
     conexao.query("select * from tbproduto", (erro, resultado) => {
       if (erro) {
         return res
@@ -52,22 +54,6 @@ app.get("/produtos/listar", (req, res) => {
     );
   });
 
-  app.put("/produto/atualizar/:id", (req, res) => {
-    conexao.query(
-      "update tbproduto set ? where idproduto=?",
-      [req.body, req.params.id],
-      (erro, resultado) => {
-        if (erro) {
-          res
-            .status(500)
-            .send({ output: `Erro ao tentar atualizar os dados -> ${erro}` });
-          return;
-        }
-        res.status(200).send({ output: resultado });
-      }
-    );
-  });
-
   app.delete("/produto/apagar/:id", (req, res) => {
     conexao.query(
       "delete from tbproduto where idproduto = ?",
@@ -86,7 +72,7 @@ app.get("/produtos/listar", (req, res) => {
 
   
 
-app.use(cors())
-
 app.listen("5000",()=>console.log("Servidor online em: http://localhost:5000"));
+
+module.exports = app;
 
