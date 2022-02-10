@@ -1,6 +1,6 @@
 const express = require("express");
 
-const cors = require("express");
+const cors = require("cors");
 
 const mysql = require("mysql");
 
@@ -66,6 +66,41 @@ app.get("/produto/listar", (req, res) => {
           return;
         }
         res.status(204).send({ output: resultado });
+      }
+    );
+  });
+  app.put("/produto/atualizar/:id", (req, res) => {
+    conexao.query(
+      "update tbproduto set ? where idproduto=?",
+      [req.body, req.params.id],
+      (erro, resultado) => {
+        if (erro) {
+          res
+            .status(500)
+            .send({ output: `Erro ao tentar atualizar os dados -> ${erro}` });
+          return;
+        }
+        res.status(200).send({ output: resultado });
+      }
+    );
+  });
+
+  app.get("/produto/buscar/:id", (req, res) => {
+    conexao.query(
+      "select * from tbproduto where idproduto=?",
+      [req.params.id],
+      (erro, resultado) => {
+        if (erro) {
+          return res
+            .status(500)
+            .send({ output: `Erro ao tentar executar a consulta ${erro}` });
+        }
+        if (resultado == null || resultado == "") {
+          return res
+            .status(404)
+            .send({ output: `Não foi possível localizar este produto` });
+        }
+        res.status(200).send({ output: resultado });
       }
     );
   });

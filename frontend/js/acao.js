@@ -25,11 +25,11 @@ function apagar() {
   
         resultado.output.map((itens, ix) => {
           linha += `<div class="card col-2">
-                  <img src=${itens.foto} class="card-img-top" alt="...">
+                  <img src=${itens.imagem} class="card-img-top" alt="...">
                   <div class="card-body">
                       <h5 class="card-title">${itens.nomeproduto}</h5>
                       <p class="card-text">${itens.descricao}</p>
-                      <p class="card-text">${itens.preco}</p>
+                      <p class="card-text2">${itens.preco}</p>
                   </div>
   
                   <div class="card-footer">
@@ -69,6 +69,7 @@ function apagar() {
     })
       .then((response) => response.json())
       .then((dados) => {
+        console.log(dados)
         alert(
           `Dados cadastrados com sucesso!\n Id gerado: ${dados.output.insertId}`
         );
@@ -92,13 +93,13 @@ function apagar() {
           dados.output[0].nomeproduto;
         document.getElementById("txtDescricao").value = dados.output[0].descricao;
         document.getElementById("txtPreco").value = dados.output[0].preco;
-        document.getElementById("txtFoto").value = dados.output[0].foto;
+        document.getElementById("txtImagem").value = dados.output[0].imagem;
       })
       .catch((erro) => console.error(`Erro ao carregar a api -> ${erro}`));
   }
   
   function atualizar() {
-    if (confirm("Você deseja atualizar este produto?") == 0) {
+    if (confirm("Você quer atualizar este produto?") == 0) {
       return;
     }
   
