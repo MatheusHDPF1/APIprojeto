@@ -8,9 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-
 app.use(cors())
-
 
 const conexao = mysql.createConnection({
     host:"localhost",
@@ -98,14 +96,12 @@ app.get("/produto/listar", (req, res) => {
         if (resultado == null || resultado == "") {
           return res
             .status(404)
-            .send({ output: `Não foi possível localizar este produto` });
+            .send({ output: `Produto não localizado` });
         }
         res.status(200).send({ output: resultado });
       }
     );
   });
-
-  
 
 app.listen("5000",()=>console.log("Servidor online em: http://localhost:5000"));
 

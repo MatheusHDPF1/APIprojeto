@@ -1,5 +1,5 @@
 function apagar() {
-    if (confirm("Você quer mesmo apagar esse produto?") == 0) {
+    if (confirm("Você quer mesmo apagar esse produto?") == 0){
       window.location.replace("index.html");
       return;
     }
@@ -29,7 +29,7 @@ function apagar() {
                   <div class="card-body">
                       <h5 class="card-title">${itens.nomeproduto}</h5>
                       <p class="card-text">${itens.descricao}</p>
-                      <p class="card-text2">${itens.preco}</p>
+                      <p class="card-text2"> Por R$ ${itens.preco}</p>
                   </div>
   
                   <div class="card-footer">
@@ -48,13 +48,13 @@ function apagar() {
       .catch((erro) => console.error(`Erro ao carregar a API -> ${erro}`));
   }
   
-  function cadastrar() {
+  function cadastrar(){
     var nome = document.getElementById("txtNomeProduto").value;
     var descricao = document.getElementById("txtDescricao").value;
     var preco = document.getElementById("txtPreco").value;
     var imagem = document.getElementById("txtImagem").value;
   
-    fetch("http://localhost:5000/produto/cadastro", {
+    fetch("http://localhost:5000/produto/cadastro",{
       method: "POST",
       headers: {
         accept: "application/json",
@@ -89,8 +89,7 @@ function apagar() {
       .then((response) => response.json())
       .then((dados) => {
         console.log(dados);
-        document.getElementById("txtNomeProduto").value =
-          dados.output[0].nomeproduto;
+        document.getElementById("txtNomeProduto").value = dados.output[0].nomeproduto;
         document.getElementById("txtDescricao").value = dados.output[0].descricao;
         document.getElementById("txtPreco").value = dados.output[0].preco;
         document.getElementById("txtImagem").value = dados.output[0].imagem;

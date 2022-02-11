@@ -7,12 +7,12 @@ describe("Aplicação Produto.", () => {
     expect(res.body).toHaveProperty("output");
   });
 
-  it("produto/buscar/:id", async () => {
+  it("produto/buscar/:id", async () =>{
     const res_buscar = await request(app).get("/produto/buscar/1");
     expect(res_buscar.body).toHaveProperty("output");
   });
 
-  it("cadastro produto/cadastro", async () => {
+  it("cadastro produto/cadastro", async () =>{
     const res_cadastro = await request(app)
       .post("/produto/cadastro")
       .send({
@@ -26,7 +26,7 @@ describe("Aplicação Produto.", () => {
     console.log(res_cadastro.text);
   });
 
-  it("atualizar produto/atualizar/:id", async () => {
+  it("atualizar produto/atualizar/:id", async () =>{
     const res_atualizar = await request(app)
       .put("/produto/atualizar/1")
       .send({
@@ -40,7 +40,7 @@ describe("Aplicação Produto.", () => {
     console.log(res_atualizar.text);
   });
 
-  it("delete produto/apagar", async () => {
+  it("teste do apagar produto/apagar", async () => {
     const res_apagar = await request(app)
       .delete("/produto/apagar/1")
       .set("Accept", "application/json")
