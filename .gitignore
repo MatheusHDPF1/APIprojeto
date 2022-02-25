@@ -1,1 +1,11 @@
 node_modules
+
+//Script
+//Create database dbprodutos
+//use dbprodutos
+//Create table tbproduto
+//idproduto int auto_increment primary key
+//nomeproduto varchar(50) not null
+//descricao text not null
+//preco decimal (10,2) not null
+//imagem varchar(200) not null
